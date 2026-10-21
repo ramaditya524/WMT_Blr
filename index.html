@@ -789,7 +789,7 @@ const petalTex=(()=>{const c=document.createElement('canvas');c.width=c.height=3
   const L=document.querySelectorAll('#weather i');if(L.length<2)return;
   L[0].style.backgroundImage=`url(${tile(7,105,15,0.55,1)})`;L[1].style.backgroundImage=`url(${tile(13,38,22,0.45,1.4)})`;
 })();
-const rainTex=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createLinearGradient(0,0,0,64);gr.addColorStop(0,'rgba(255,255,255,0)');gr.addColorStop(1,'#fff');g.strokeStyle=gr;g.lineWidth=2;g.beginPath();g.moveTo(36,18);g.lineTo(30,46);g.stroke();return new THREE.CanvasTexture(c)})();
+const rainTex=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createLinearGradient(0,10,0,54);gr.addColorStop(0,'rgba(255,255,255,0.15)');gr.addColorStop(1,'rgba(255,255,255,1)');g.strokeStyle=gr;g.lineCap='round';g.lineWidth=6;g.beginPath();g.moveTo(37,10);g.lineTo(27,54);g.stroke();return new THREE.CanvasTexture(c)})();
 const pMat=new THREE.PointsMaterial({size:5,sizeAttenuation:false,vertexColors:true,transparent:true,opacity:0.9,depthWrite:false,map:petalTex,alphaTest:0.2});
 const particles=new THREE.Points(pGeo,pMat);particles.frustumCulled=false;scene.add(particles);
 let pSpan=60,pInit=false;
@@ -805,7 +805,7 @@ function applySeason(){
   resolveSeason();buildSky();paintTerrain();treeCenter='';pInit=false;
   const P=PAL[season];
   particles.visible=!reduced&&!!P.pkind&&(P.pkind!=='petal'||bloomScale>0.5);
-  pMat.map=P.pkind==='rain'?rainTex:petalTex;pMat.size=P.pkind==='rain'?(PHONE?18:24):6;pMat.needsUpdate=true;
+  pMat.map=P.pkind==='rain'?rainTex:petalTex;pMat.size=P.pkind==='rain'?(PHONE?20:26):6;pMat.alphaTest=P.pkind==='rain'?0.02:0.2;pMat.needsUpdate=true;
   pGeo.setDrawRange(0,P.pkind==='rain'?PN:PN_PETAL);
   $('weather').classList.toggle('on',P.pkind==='rain');
   document.querySelectorAll('#season button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===seasonPref));
