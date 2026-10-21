@@ -129,7 +129,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 <body>
 <div id="app">
   <div id="map" aria-label="Isometric 3D map of Namma Metro in Bengaluru with trains running on the published timetable"></div>
-  <div id="weather" aria-hidden="true"><i></i><i></i></div>
+  <div id="weather" aria-hidden="true"></div>
   <div id="labels"></div>
   <div class="boot" id="boot">Building viaducts…</div>
 
@@ -786,7 +786,7 @@ const petalTex=(()=>{const c=document.createElement('canvas');c.width=c.height=3
       g.strokeStyle=`rgba(225,236,246,${a})`;g.lineWidth=wid;
       for(const dy of [0,256,-256])for(const dx of [0,256,-256]){g.beginPath();g.moveTo(x+dx,y+dy);g.lineTo(x+dx-l*0.22,y+dy+l);g.stroke()}}
     return c.toDataURL()};
-  const L=document.querySelectorAll('#weather i');
+  const L=document.querySelectorAll('#weather i');if(L.length<2)return;
   L[0].style.backgroundImage=`url(${tile(7,105,15,0.55,1)})`;L[1].style.backgroundImage=`url(${tile(13,38,22,0.45,1.4)})`;
 })();
 const rainTex=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');const gr=g.createLinearGradient(0,0,0,64);gr.addColorStop(0,'rgba(255,255,255,0)');gr.addColorStop(1,'#fff');g.strokeStyle=gr;g.lineWidth=2;g.beginPath();g.moveTo(36,18);g.lineTo(30,46);g.stroke();return new THREE.CanvasTexture(c)})();
